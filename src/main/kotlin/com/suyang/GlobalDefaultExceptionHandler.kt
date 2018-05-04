@@ -41,7 +41,7 @@ class GlobalDefaultExceptionHandler {
     @ResponseBody
     @ExceptionHandler(APIException::class)
     fun handleAPIException(request: HttpServletRequest, ex: APIException): ResponseMessage {
-        return createErrorMessage(request, ex.type!!.name, ErrorType.API.value)
+        return createErrorMessage(request, ex.type.name, ErrorType.API.value)
     }
 
     private fun createErrorMessage(request: HttpServletRequest, key: String, code: Int): ResponseMessage {

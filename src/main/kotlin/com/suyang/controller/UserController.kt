@@ -3,6 +3,7 @@ package com.suyang.controller
 import com.suyang.domain.User
 import com.suyang.exceptions.APIException
 import com.suyang.exceptions.APIExceptionType
+import com.suyang.exceptions.ErrorType
 import com.suyang.repository.UserRepository
 import com.suyang.utils.CryptoUtils
 import org.springframework.beans.factory.annotation.Autowired
