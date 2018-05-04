@@ -25,14 +25,14 @@ import javax.servlet.http.HttpServletRequest
 class GlobalDefaultExceptionHandler {
 
     @ResponseBody
-    @ExceptionHandler(value = Exception::class)
+    @ExceptionHandler(Exception::class)
     fun defaultErrorHandler(request: HttpServletRequest, e: Exception): ResponseMessage {
         val key = APIExceptionType.UnKnow.name
         return createErrorMessage(request, key, ErrorType.System.value)
     }
 
     @ResponseBody
-    @ExceptionHandler(value = SQLException::class)
+    @ExceptionHandler(SQLException::class)
     fun sqlErrorHandler(request: HttpServletRequest, e: Exception): ResponseMessage {
         val key = APIExceptionType.UnKnow.name
         return createErrorMessage(request, key, ErrorType.Database.value)

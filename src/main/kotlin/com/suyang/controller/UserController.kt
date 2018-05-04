@@ -20,19 +20,19 @@ class UserController {
     private
     lateinit var userRepository: UserRepository
 
-    @RequestMapping(value = "/api/user/{id}", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = ["/api/user/{id}"], method = [RequestMethod.GET])
     fun findOne(@PathVariable("id") id: Int): User? {
         return this.userRepository.findById(id).orElse(null)
     }
 
-    @RequestMapping(value = "/api/user", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = ["/api/user"], method = [RequestMethod.GET])
     fun findAll(@RequestParam(name = "pageIndex", required = false, defaultValue = "1") pageIndex: Int,
                 @RequestParam(name = "pageSize", required = false, defaultValue = "10") pageSize: Int): Page<User> {
         val pageable = PageRequest.of(pageIndex - 1, pageSize)
         return this.userRepository.findAll(pageable)
     }
 
-    @RequestMapping(value = "/api/user", method = arrayOf(RequestMethod.POST))
+    @RequestMapping(value = ["/api/user"], method = [RequestMethod.POST])
     fun create(loginName: String,
                loginPwd: String,
                realName: String,
@@ -53,7 +53,7 @@ class UserController {
         return this.userRepository.save(user)
     }
 
-    @RequestMapping(value = "/api/user", method = arrayOf(RequestMethod.PUT))
+    @RequestMapping(value = ["/api/user"], method = [RequestMethod.PUT])
     fun modify(id: Int,
                loginPwd: String,
                realName: String,
@@ -72,7 +72,7 @@ class UserController {
         return this.userRepository.save(user)
     }
 
-    @RequestMapping(value = "/api/user/{id}", method = [(RequestMethod.DELETE)])
+    @RequestMapping(value = ["/api/user/{id}"], method = [RequestMethod.DELETE])
     @Throws(Exception::class)
     fun delete(@PathVariable("id") id: Int): Int {
         var result = 0
@@ -87,7 +87,7 @@ class UserController {
         return result
     }
 
-    @RequestMapping(value = "/api/user/checkname")
+    @RequestMapping(value = ["/api/user/checkname"])
     fun existsName(loginName: String): Boolean {
         return this.userRepository.countByLoginName(loginName) > 0
     }

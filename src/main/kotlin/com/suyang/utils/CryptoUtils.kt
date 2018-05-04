@@ -26,15 +26,15 @@ object CryptoUtils {
      * @return
      */
     fun getHash(password: String, salt: String): String {
-        var keyGenerator: Rfc2898DeriveBytes? = null
+        lateinit var keyGenerator: Rfc2898DeriveBytes
         try {
             keyGenerator = Rfc2898DeriveBytes(password + salt, saltSize, iterations)
         } catch (e1: Exception) {
             e1.printStackTrace()
         }
 
-        val subKey = keyGenerator!!.getBytes(subKeySize)
-        val bSalt = keyGenerator!!.salt
+        val subKey = keyGenerator.getBytes(subKeySize)
+        val bSalt = keyGenerator.salt
         val hashPassword = ByteArray(1 + saltSize + subKeySize)
         System.arraycopy(bSalt, 0, hashPassword, 1, saltSize)
         System.arraycopy(subKey, 0, hashPassword, saltSize + 1, subKeySize)
